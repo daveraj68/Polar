@@ -1,6 +1,10 @@
-# polar
-
+# Polar
 Realtime Polls and Surveys
+
+- **[Harsh Chaudhary](https://github.com/hrshcdry)** (17IT012) 
+- **[Raj Dave](https://github.com/gabbar68)** (17IT016)
+
+To run, create a new firebase project and put your projects' google-services.json file inside android/app 
 
 ## Getting Started
 
