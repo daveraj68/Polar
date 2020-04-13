@@ -1,5 +1,5 @@
 # Polar
-Realtime Polls and Surveys
+Realtime Polls
 
 - **[Harsh Chaudhary](https://github.com/hrshcdry)** (17IT012) 
 - **[Raj Dave](https://github.com/gabbar68)** (17IT016)
