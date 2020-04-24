@@ -19,18 +19,31 @@ class LaunchScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               Container(
-                margin: EdgeInsets.only(top: 100),
+                margin: EdgeInsets.only(top: 80),
                 child: Text(
                   kAppName,
                   style: TextStyle(
                     fontSize: 40.0,
                     fontWeight: FontWeight.bold,
-                    color: Colors.blueAccent,
+                    color: Colors.black,
                   ),
                 ),
               ),
+//              Text(
+//                authState.authStatus,
+//              ),
+//              Text(
+//                authState.uid,
+//              ),
               SizedBox(
                 height: 200.0,
+              ),
+              Image(
+                  image: AssetImage('assets/4585.jpg'),
+                width: 100.0,
+              ),
+              SizedBox(
+                height: 50.0,
               ),
               if (authState.authStatus == kAuthLoading)
                 Text(
@@ -44,14 +57,7 @@ class LaunchScreen extends StatelessWidget {
                     children: <Widget>[
                       LoginButton(
                         label: 'Google Sign In',
-                        onPressed: () => signIn(context, kAuthSignInGoogle),
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      LoginButton(
-                        label: 'Anonymous Sign In',
-                        onPressed: () => signIn(context, kAuthSignInAnonymous),
+                        onPressed: () => signIn(context),
                       ),
                     ],
                   ),
@@ -61,6 +67,7 @@ class LaunchScreen extends StatelessWidget {
                   'Error...',
                   style: TextStyle(fontSize: 12.0, color: Colors.redAccent),
                 ),
+
             ],
           ),
         );
@@ -68,9 +75,9 @@ class LaunchScreen extends StatelessWidget {
     );
   }
 
-  void signIn(context, String service) {
+  void signIn(context) {
     //Navigator.pushReplacementNamed(context, '/home');
     Provider.of<AuthenticationState>(context, listen: true)
-        .login(serviceName: service);
+        .login();
   }
 }

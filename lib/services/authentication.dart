@@ -61,11 +61,3 @@ Future<Map<String, String>> signInWithGoogle() async {
   return null;
 }
 
-Future<Map<String, String>> signInAnonymously() async {
-  final FirebaseUser user = (await _auth.signInAnonymously()).user;
-
-  if (user != null) {
-    return exposeUser(kUsername: '', kUID: user.uid);
-  }
-  return null;
-}

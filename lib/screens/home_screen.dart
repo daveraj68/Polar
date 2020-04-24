@@ -151,6 +151,6 @@ class _HomeScreeenState extends State<HomeScreeen> {
     final option = Provider.of<VoteState>(context, listen: false)
         .selectedOptionInActiveVote;
 
-    markVote(voteId, option);
+    markVote(voteId, option, context);
   }
 }

@@ -10,7 +10,9 @@ import 'package:polar/state/authentication.dart';
 import 'package:polar/utilities.dart';
 import 'package:polar/screens/join.dart';
 import 'package:flutter/services.dart';
+import 'package:polar/screens/create.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:polar/screens/code.dart';
 
 void main() => runApp(VoteApp());
 
@@ -45,8 +47,6 @@ class VoteApp extends StatelessWidget {
           primaryTextTheme: TextTheme(
               title: TextStyle(
             color: Colors.black,
-            fontWeight: FontWeight.bold,
-            fontSize: 25,
           )),
           textTheme: GoogleFonts.latoTextTheme(
             Theme.of(context).textTheme,
@@ -76,20 +76,37 @@ class VoteApp extends StatelessWidget {
                 body: Join(),
                 floatingActionButton: FloatingActionButton(
                   onPressed: () {
-                    // Add your onPressed code here!
+                    gotoCreateScreen(context);
                   },
                   child: Icon(Icons.add),
                   backgroundColor: Theme.of(context).primaryColor,
                 ),
               ),
+          '/vote': (context) => Scaffold(
+            appBar: AppBar(
+                  title: Text(
+                    "Vote",
+                  ),
+              actions: <Widget>[
+                IconButton(
+                  icon: Icon(Icons.person),
+                  onPressed: () {
+//                        _select(choices[0]);
+                  },
+                ),
+                getActions(context),
+              ],
+            ),
+            body: HomeScreeen(),
+          ),
           '/result': (context) => Scaffold(
                 appBar: AppBar(
                   title: Text('Result'),
                   leading: IconButton(
                     icon: Icon(Icons.home),
-                    color: Colors.white,
                     onPressed: () {
-                      Navigator.pushReplacementNamed(context, '/home');
+                      Provider.of<VoteState>(context, listen: true).code=null;
+                      Navigator.popUntil(context, ModalRoute.withName('/home'));
                     },
                   ),
                   actions: <Widget>[
@@ -98,6 +115,24 @@ class VoteApp extends StatelessWidget {
                 ),
                 body: ResultScreen(),
               ),
+          '/create': (context) => Scaffold(
+            appBar: AppBar(
+              title: Text(
+                "Create a Poll",
+              ),
+              actions: <Widget>[
+                IconButton(
+                  icon: Icon(Icons.person),
+                  onPressed: () {
+//                        _select(choices[0]);
+                  },
+                ),
+                getActions(context),
+              ],
+            ),
+            body: Create(),
+          ),
+          '/code': (context) => Code(),
         },
       ),
     );

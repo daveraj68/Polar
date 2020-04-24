@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:polar/utilities.dart';
 import 'package:provider/provider.dart';
 import 'package:polar/services/services.dart';
 import 'package:polar/state/vote.dart';
 import 'package:loading/loading.dart';
 import 'package:loading/indicator/ball_pulse_indicator.dart';
 import 'home_screen.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/services.dart';
 
 class Join extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
+  String _ucode;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -48,6 +51,7 @@ class Join extends StatelessWidget {
                         if (val.isEmpty) {
                           return "Please Enter Code";
                         } else {
+                          _ucode=val;
                           return null;
                         }
                       },
@@ -67,8 +71,20 @@ class Join extends StatelessWidget {
                         // If the form is valid, display a snackbar. In the real world,
                         // you'd often call a server or save the information in a database.
 
-                        Scaffold.of(context).showSnackBar(
-                            SnackBar(content: Text('Processing Data')));
+//
+                         //gotoHomeScreen(context);
+                        FocusScope.of(context).requestFocus(FocusNode());
+                        Firestore.instance.collection(kVotes).document(_ucode).get().then((doc){
+                          if(doc.exists){
+                            Provider.of<VoteState>(context, listen: false).setCode(_ucode);
+                            gotoVoteScreen(context);
+                          }
+                          else{
+                            Scaffold.of(context).showSnackBar(
+                            SnackBar(content: Text('Code Invalid')));
+                          }
+                        });
+
                       }
                     },
                     child: Text('Submit',
@@ -86,9 +102,6 @@ class Join extends StatelessWidget {
                   ),
                 ),
               ])),
-          SizedBox(
-            height: 100.0,
-          ),
         ],
       ),
     );

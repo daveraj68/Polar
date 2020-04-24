@@ -5,7 +5,7 @@ class LoginButton extends StatelessWidget {
   double size;
   Function onPressed;
 
-  LoginButton({this.label, this.size = 300.0, this.onPressed});
+  LoginButton({this.label, this.size = 340.0, this.onPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -31,4 +31,13 @@ class LoginButton extends StatelessWidget {
   }
 }
 
+
+class RegBox extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 15.0,
+    );
+  }
+}
 

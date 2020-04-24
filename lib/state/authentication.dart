@@ -14,7 +14,9 @@ class AuthenticationState with ChangeNotifier {
   String _uid;
 
   String get authStatus => _authStatus;
+
   String get username => _username;
+
   String get uid => _uid;
 
   AuthenticationState() {
@@ -56,16 +58,13 @@ class AuthenticationState with ChangeNotifier {
     _uid = null;
   }
 
-  void login({String serviceName}) {
-    if (serviceName == kAuthSignInGoogle) {
+  void login() {
       signInWithGoogle();
-    } else if (serviceName == kAuthSignInAnonymous) {
-      signInAnonymously();
-    }
   }
 
   void logout() {
     clearState();
     signOut();
   }
+
 }
